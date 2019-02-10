@@ -1,55 +1,56 @@
-const assert = require('assert');
+const expect = require('chai').expect;
+const TestsSports = require('../../testsObjects/TestsSports');
 
-describe('test site sports.ru', () => {
+
+describe('test main title of sports.ru', () => {
+
     it('test title', () => {
-        browser.url('https://www.sports.ru');
-        let title = browser.getTitle();
-        assert.equal(title, "Спорт: футбол, хоккей, баскетбол, теннис, бокс, Формула-1 — все новости спорта на Sports.ru");
+        TestsSports.open();
+        assert.equal(browser.getTitle(), "Спорт: футбол, хоккей, баскетбол, теннис, бокс, Формула-1 — все новости спорта на Sports.ru");
+    });
 
-        let outerHTML = $(".svg-icon").getHTML();
-        console.log(outerHTML);
+    it("test to enter profile", () => {
+        TestsSports.loginMyProfile();
+    });
+
+    // it("test of date of registration in profile", () => {
+    //     assert.equal(TestsSports.getDateOfRegistration(), "10 февраля");
+    //     TestsSports.goToMainPage;
+    // });
+
+    it("test width of main logo", () => {
+        assert.equal(TestsSports.widthOfMainLogo, 36);
+    });
+
+    it("test existing of main-menu", () => {
+        TestsSports.isExistingMainManu.should.be.equal(true);
+    });
+
+    it("test text of caption on main page", () => {
+        assert.equal(TestsSports.textOfCaption, "ВИДЕО ДНЯ");
+    });     
+
+    it("test of select sports team", () => {
+        TestsSports.selectSports.click();
+        assert.equal(TestsSports.footballSportIsExisting, true);
+    });
+
+    it("test existing of header", ()=> {
+        assert.equal(TestsSports.isExistingMainHeader, true);
     });
 
     it("test new page Fantasy", () => {
-        browser.url('https://www.sports.ru');
-        let fantasy = $(".main-menu__item-fantasy .main-menu__link");
-        fantasy.click(".main-menu__item-fantasy .cmain-menu__link");
-        let title = browser.getTitle();
-        assert.equal(title, "Фэнтези - Sports.ru");
+        TestsSports.toVisitFantasyPage;
+        assert.equal(browser.getTitle(), "Фэнтези - Sports.ru");
+    });
+
+    it("test VK link", () => {
+        TestsSports.toUseVkLink;
     });
 
     it("test link of yourTeam", () => {
-        let teamLink = $(".two-column-table:first-of-type tr:nth-of-type(2) td:nth-of-type(3)");
-        teamLink.click();
-        let captionText = $(".section-about__title").getText();
-        assert.equal(captionText, "Обменивай заработанные в игре очки на мили Tinkoff ALL Airlines");
-        let mainPage = $(".header__wrap nav a:first-of-type");
-        mainPage.click();
-    });
-
-    it("test select sport", () => {
-        let selectSport = $(".users-news__select option:nth-of-type(2)");
-        let isDisplayed = selectSport.isDisplayed();
-        assert.equal(isDisplayed, false);
-        browser.pause(4000);
-    });
-
-    it("test current url", () => {
-        let vkLink = $(".color-link_vk");
-        vkLink.click();
-        let currentUrl = browser.getUrl();
-        assert.equal(currentUrl, "https://vk.com/sportsru");
-    });
-
-    it("test color of current page", () => {
-        let mainLink = $(".main-menu_type_first  .main-menu__list > li:first-of-type > a");
-        let color = mainLink.getCSSProperty("color");
-        assert.equal(color.value, "rgb(0, 170, 50)");
-    });
-
-    it("test availability of header", ()=> {
-        let mainHeader = $(".user-panel__dynamic-content-wrapper");
-        let isExisting = mainHeader.isExisting();
-        assert.equal(isExisting, true);
-    });
+        TestsSports.toUseAssembleTeamLink;
+        assert.equal(TestsSports.getTextOfCaptionNewLink, "Обменивай заработанные в игре очки на мили Tinkoff ALL Airlines");
+        TestsSports.backToMainPage;
+    }); 
 });
