@@ -1,3 +1,13 @@
+Для запуска теста:
+1. Установить WebdriverIO согласно инструкции по ссылке - https://webdriver.io/docs/gettingstarted.html
+2. После этого можно  также установить готовую сборку (я использовал эту - https://github.com/michaelguild13/Selenium-WebdriverIO-Mocha-Chai-Boilerplate)
+3. Необходимо установить Node.js версии 10.15.1
+4. Файл с тестами ("test sports") поместить по пути WebdriverIO/test/specs/..., где "WebdriverIO" - корневая папка с готовой сборкой
+5. Папку "testsObjects" поместить в корневую папку с готовой сборкой
+6. Открыть в корневой папке файл с настройками wdio.conf и изменить "baseUrl" на "https://www.sports.ru/", а ниже добавить свойство "path: '/',"
+7. Запустить через консоль geckodriver командой: geckodriver --port 4444 и оставить работать в фоновом режиме
+8. Через консоль зайти в корневую папку с WebdriverIO и запустить тест командой: npm test
+
 widthOfMainLogo - получение ширины логотипа на главной странице сайта
 
 isExistingMainManu - булевое значение в зависимости от нахождения в DOM меню с навигацией
